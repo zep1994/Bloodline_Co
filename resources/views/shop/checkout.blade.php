@@ -52,14 +52,14 @@
                         <div class='form-row row'>
                             <div class='col-xs-12 form-group required'>
                                 <label class='control-label'>Name</label> <input
-                                    class='form-control' size='4' type='text'>
+                                    class='form-control' size='4' type='text' name='name'>
                             </div>
                         </div>
 
                         <div class='form-row row'>
                             <div class='col-xs-12 form-group required'>
                                 <label class='control-label'>Shipping Address</label> <input
-                                    class='form-control' size='4' type='text'>
+                                    class='form-control' size='4' type='text' name='address'>
                             </div>
                         </div>
 

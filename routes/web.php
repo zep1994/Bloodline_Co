@@ -15,16 +15,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'ProductController@index');
 
+Route::get('/profile', 'UserController@getProfile')->middleware('auth');
+
 Route::get('/add-to-cart/{id}', 'ProductController@getAddToCart')->name('product.addToCart');
 Route::get('/shopping-cart', 'ProductController@getCart')->name('shop.shoppingCart');
 
-Route::get('/checkout', 'ProductController@getCheckout');
-Route::post('/checkout', 'ProductController@postCheckout');
+Route::get('/checkout', 'ProductController@getCheckout')->middleware('auth');
+Route::post('/checkout', 'ProductController@postCheckout')->middleware('auth');
 
 Route::get('/register', 'UserController@getRegister');
 Route::post('/register', 'UserController@postRegister');
 
-Route::get('/login', 'UserController@getLogin');
-Route::post('/login', 'UserController@postLogin');
+Route::get('/login', 'UserController@getLogin')->name('login');
+Route::post('/login', 'UserController@postLogin')->name('login');
 
 Route::get('/logout', 'UserController@logout');

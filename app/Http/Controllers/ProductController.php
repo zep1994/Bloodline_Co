@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\Order;
 use Stripe;
 use Session;
+use Auth;
 
 class ProductController extends Controller
 {
@@ -65,15 +67,25 @@ class ProductController extends Controller
         $cart = new Cart($oldCart);
 
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-        Stripe\Charge::create ([
+        try {
+            $charge = Stripe\Charge::create ([
                 "amount" => $cart->totalPrice * 100,
                 "currency" => "usd",
                 "source" => $request->stripeToken,
                 "description" => "Making test payment." 
-        ]);
+            ]);
 
-        Session::flash('success', 'Payment has been successfully processed.');
-        Session::forget('cart');
+            $order = new Order();
+            $order->cart = serialize($cart);
+            $order->address = $request->input('address');
+            $order->name = $request->input('name');
+            $order->payment_id = $charge->id;
+
+            Auth::user()->orders()->save($order);
+            Session::forget('cart');
+        } catch (\Throwable $th) {
+            return redirect('/checkout')->with('error', $e->getMessage());
+        }
         return redirect('/')->with('success', 'Payment Successfully Processed');
     }
 }

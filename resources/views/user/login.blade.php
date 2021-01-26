@@ -65,6 +65,7 @@
                             </div>
                         </div>
                     </form>
+                    <p class="ml-5 mt-3">Don't Have An Account? <a href="/register">Sign Up</a></p>
                 </div>
             </div>
         </div>

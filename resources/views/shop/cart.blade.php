@@ -10,14 +10,15 @@
                         <li class="list-group-item ml-4">
                             <span class="badge">{{ $product['qty'] }}</span>
                             <strong>{{ $product['item']['name'] }}</strong>
+                            <span>{{ $product['item']['description'] }}</span>
                             <span class="label label-success">${{ $product['price'] }}</span>
                             <div class="btn-group ml-4">
                                 <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
                                     Action <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Reduce by 1</a></li>
-                                    <li><a href="#">Reduce by All</a></li>
+                                    <li><a href="/reduce/{{ $product['item']['id'] }}">Reduce by 1</a></li>
+                                    <li><a href="/remove/{{ $product['item']['id'] }}">Reduce Item</a></li>
                                 </ul>
                             </div>
                         </li>

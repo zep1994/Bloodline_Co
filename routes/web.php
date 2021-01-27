@@ -18,6 +18,8 @@ Route::get('/', 'ProductController@index');
 Route::get('/profile', 'UserController@getProfile')->middleware('auth');
 
 Route::get('/add-to-cart/{id}', 'ProductController@getAddToCart')->name('product.addToCart');
+Route::get('/reduce/{id}', 'ProductController@getReduceByOne');
+Route::get('/remove/{id}', 'ProductController@getRemoveItem');
 Route::get('/shopping-cart', 'ProductController@getCart')->name('shop.shoppingCart');
 
 Route::get('/checkout', 'ProductController@getCheckout')->middleware('auth');

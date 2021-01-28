@@ -2,8 +2,18 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
-@import 'variables';
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
 
 @import 'base/base.scss';
+@import 'base/typography';
+@import 'base/utilities';
 
-@import 'abstracts/mixins';
+@import 'components/button';
+
+
+@import 'layout/footer';
+@import 'layout/header';
+@import 'layout/navigation';
+
+@import 'pages/home';

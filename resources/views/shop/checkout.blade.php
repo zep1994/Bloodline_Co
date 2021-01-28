@@ -43,6 +43,13 @@
                         </div>
                     @endif
 
+                    @if (Session::has('error'))
+                        <div class="alert alert-danger text-center">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                            <p>{{ Session::get('error') }}</p>
+                        </div>
+                    @endif
+
                     <form role="form" action="/checkout" method="post" class="validation"
                                                     data-cc-on-file="false"
                                                     data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
@@ -143,7 +150,7 @@ $(function() {
   
     if (!$form.data('cc-on-file')) {
       e.preventDefault();
-      Stripe.setPublishableKey($form.data('stripe-publishable-key'));
+      Stripe.setPublishableKey('pk_test_51IB3XJKrNVWoZ44hgMGDUEm1QQN5l28nlrWNXtmMyjWWwcSJxU1TsIvmlNDLHM94JR4yk9pWqWIlNjBtbm0lm85800ytaOefrO');
       Stripe.createToken({
         number: $('.card-num').val(),
         cvc: $('.card-cvc').val(),

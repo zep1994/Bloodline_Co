@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'ProductController@index');
+Route::get('/', 'UserController@index');
+Route::get('/products', 'ProductController@index');
 
 Route::get('/profile', 'UserController@getProfile')->middleware('auth');
 
@@ -32,3 +33,9 @@ Route::get('/login', 'UserController@getLogin')->name('login');
 Route::post('/login', 'UserController@postLogin')->name('login');
 
 Route::get('/logout', 'UserController@logout');
+
+Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function() 
+{
+    Route::get('/product/create', 'ProductController@create')->middleware('auth');
+    Route::post('/product/create', 'ProductController@store')->middleware('auth');    
+});
